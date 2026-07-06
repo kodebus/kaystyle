@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karla Martinez — Exposiciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --cream:#F4EBDC;
+    --paper:#FFFBF2;
+    --ink:#241A12;
+    --ink-soft:#473527;
+    --terracotta:#B8472B;
+    --terracotta-dim:#8f3a24;
+    --gold:#D9A23B;
+    --teal:#1C6B61;
+    --teal-deep:#103e38;
+    --line:rgba(36,26,18,0.14);
+    --max:1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--gold);color:var(--ink);}
+  :focus-visible{outline:2.5px solid var(--teal);outline-offset:3px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:'';width:18px;height:1px;background:var(--terracotta);display:inline-block;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.01em;}
+
+  /* NAV */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 36px;
+    background:rgba(36,26,18,0.92);
+    color:#fff;
+    font-family:'Space Mono',monospace;font-size:12px;
+    letter-spacing:0.12em;text-transform:uppercase;
+    backdrop-filter:blur(6px);
+  }
+  .nav-name{font-weight:700;}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{opacity:0.85;transition:opacity .25s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-links a.active{color:var(--gold);opacity:1;}
+  @media(max-width:640px){
+    .nav{padding:18px 20px;}
+    .nav-links{gap:14px;font-size:10px;}
+  }
+
+  /* PAGE HEADER */
+  .page-head{
+    padding:160px 0 70px;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .page-head h1{
+    font-size:clamp(44px,7vw,84px);
+    line-height:1;
+    color:var(--ink);
+    margin:20px 0 24px;
+  }
+  .page-head h1 em{font-style:italic;color:var(--terracotta);}
+  .page-head p{
+    max-width:580px;
+    font-size:17px;
+    line-height:1.75;
+    color:var(--ink-soft);
+  }
+
+  /* FEATURED EXHIBITION ROWS */
+  .exhibits{padding:90px 0 40px;}
+  .section-label{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:44px;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .ex-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:center;
+    padding:52px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .ex-row:nth-child(even) .ex-figure{order:2;}
+  .ex-row:nth-child(even) .ex-info{order:1;}
+  @media(max-width:820px){
+    .ex-row{grid-template-columns:1fr;gap:24px;}
+    .ex-row:nth-child(even) .ex-figure,.ex-row:nth-child(even) .ex-info{order:initial;}
+  }
+
+  .ex-figure{
+    position:relative;
+    background:var(--paper);
+    padding:14px;
+    box-shadow:0 26px 54px -30px rgba(36,26,18,0.4);
+  }
+  .ex-figure img{width:100%;height:auto;display:block;}
+
+  .ex-year{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--terracotta);
+    margin-bottom:6px;
+    display:block;
+  }
+  .ex-info h2{
+    font-size:clamp(26px,3.4vw,38px);
+    color:var(--ink);
+    margin-bottom:14px;
+    line-height:1.1;
+  }
+  .ex-info p{
+    font-size:15.5px;
+    line-height:1.75;
+    color:var(--ink-soft);
+    max-width:460px;
+  }
+  .ex-meta{
+    margin-top:18px;
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-left:2px solid var(--terracotta);
+    padding-left:14px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+  }
+
+  /* MOMENTS GRID */
+  .moments{padding:80px 0 110px;}
+  .moments-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:24px;
+    margin-top:44px;
+  }
+  .moment{
+    background:var(--paper);
+    padding:12px;
+    box-shadow:0 20px 44px -30px rgba(36,26,18,0.4);
+  }
+  .moment img{width:100%;height:280px;object-fit:cover;display:block;}
+  .moment span{
+    display:block;
+    font-family:'Space Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:12px 4px 4px;
+  }
+
+  /* CTA back */
+  .ex-cta{
+    text-align:center;
+    padding:20px 0 20px;
+  }
+  .ex-cta a{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--paper);
+    background:var(--terracotta);
+    padding:15px 28px;
+    transition:background .25s,gap .25s;
+  }
+  .ex-cta a:hover{background:var(--terracotta-dim);gap:16px;}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(247,235,217,0.6);padding:36px 0;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.05em;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .footer-row a{border-bottom:1px solid rgba(247,235,217,0.3);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* LIGHTBOX */
+  .lightbox{
+    position:fixed;inset:0;background:rgba(18,11,7,0.94);
+    display:flex;align-items:center;justify-content:center;
+    z-index:100;opacity:0;pointer-events:none;transition:opacity .3s;padding:40px;
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+  .lightbox img{max-width:90vw;max-height:85vh;box-shadow:0 40px 80px rgba(0,0,0,0.5);}
+  .lightbox-close{
+    position:absolute;top:28px;right:36px;color:#fff;
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+    cursor:pointer;display:flex;align-items:center;gap:8px;
+  }
+  .clickable{cursor:zoom-in;}
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-name"><a href="index.html">Karla Martinez</a></span>
+  <div class="nav-links">
+    <a href="index.html#about">Sobre mí</a>
+    <a href="index.html#gallery">Galería</a>
+    <a href="exposiciones.html" class="active">Exposiciones</a>
+    <a href="index.html#contact">Contacto</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">Trayectoria</div>
+    <h1>Exposiciones<br><em>y reconocimientos</em></h1>
+    <p>A lo largo de su carrera, la obra de Karla ha viajado por Ecuador, Perú, Cuba y más allá — en muestras individuales y colectivas, festivales internacionales y honores por su aporte al arte. Aquí una selección de esos momentos.</p>
+  </div>
+</header>
+
+<!-- FEATURED EXHIBITIONS -->
+<section class="exhibits">
+  <div class="wrap">
+    <div class="section-label">Exposiciones y distinciones destacadas</div>
+
+    <!-- 2019 -->
+    <article class="ex-row reveal">
+      <div class="ex-figure clickable">
+        <img src="images/exhibitions/cumbre-mundial-artes-2019.jpg" alt="Folleto de la Cumbre Mundial de las Artes por la Paz y la Vida, 2019, con la obra Iglesia del Lago de Karla Martinez">
+      </div>
+      <div class="ex-info">
+        <span class="ex-year">2019</span>
+        <h2>Cumbre Mundial de las Artes por la Paz y la Vida</h2>
+        <p>Karla participó en esta muestra colectiva internacional con su obra <em>"Iglesia del lago"</em>, junto a artistas de distintos países. Una celebración del arte como lenguaje de paz.</p>
+        <div class="ex-meta">
+          <span>Lugar — Palacio de Cristal</span>
+          <span>Fecha — 16 de agosto de 2019</span>
+          <span>Obra — "Iglesia del lago"</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2020 -->
+    <article class="ex-row reveal">
+      <div class="ex-figure clickable">
+        <img src="images/exhibitions/mujeres-en-accion-2020.jpg" alt="Afiche de la exposicion Mujeres en Accion, Museo Centro Cultural Manta, 2020">
+      </div>
+      <div class="ex-info">
+        <span class="ex-year">2020</span>
+        <h2>Exposición "Mujeres en Acción"</h2>
+        <p>Muestra colectiva organizada por la Fundación Bellas Artes, con el respaldo del Ministerio de Cultura y Patrimonio del Ecuador, reuniendo a mujeres artistas del país.</p>
+        <div class="ex-meta">
+          <span>Lugar — Museo Centro Cultural Manta, Ecuador</span>
+          <span>Fecha — 13 de marzo al 3 de abril de 2020</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2022 -->
+    <article class="ex-row reveal">
+      <div class="ex-figure clickable">
+        <img src="images/exhibitions/diploma-bicentenario-2022.jpg" alt="Diploma otorgado a Karla Martinez por participar en el Bicentenario de America, Pucallpa, Peru, 2022">
+      </div>
+      <div class="ex-info">
+        <span class="ex-year">2022</span>
+        <h2>Artista del Bicentenario de América</h2>
+        <p>Diploma concedido a Karla por su participación en el Bicentenario de América, reconociéndola como una artista del bicentenario. Otorgado por la Municipalidad de Manantay.</p>
+        <div class="ex-meta">
+          <span>Lugar — Manantay, Pucallpa, Perú</span>
+          <span>Fecha — 24 de julio de 2022</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2024 -->
+    <article class="ex-row reveal">
+      <div class="ex-figure clickable">
+        <img src="images/exhibitions/nala-project-cuba-2024.jpg" alt="Certificado de participacion de Karla Martinez en la exposicion de arte NALA, La Habana, Cuba, 2024">
+      </div>
+      <div class="ex-info">
+        <span class="ex-year">2024</span>
+        <h2>The NALA Project — La Habana, Cuba</h2>
+        <p>Karla representó a Ecuador en esta exposición internacional itinerante que ha recorrido países de África, Europa y América. Un proyecto que une artistas de todo el mundo.</p>
+        <div class="ex-meta">
+          <span>Lugar — La Habana, Cuba</span>
+          <span>Fecha — 25 de mayo al 9 de junio de 2024</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Festival Korea -->
+    <article class="ex-row reveal">
+      <div class="ex-figure clickable">
+        <img src="images/exhibitions/festival-korea-del-sur.jpg" alt="Afiche del Festival de Corea del Sur presentando a Karla Martinez como artista de Ecuador">
+      </div>
+      <div class="ex-info">
+        <span class="ex-year">Festival internacional</span>
+        <h2>Festival de Corea del Sur</h2>
+        <p>Karla representó a Ecuador en este festival internacional dedicado al arte como lenguaje de convivencia, bajo el lema <em>"El clímax del arte no es un destino sino un camino."</em></p>
+        <div class="ex-meta">
+          <span>Representando a — Ecuador</span>
+          <span>Tema — Lenguaje de la convivencia, arte</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Distincion -->
+    <article class="ex-row reveal">
+      <div class="ex-figure clickable">
+        <img src="images/exhibitions/distincion-embajador-arte.jpg" alt="Distincion Embajador del Arte de America otorgada a Karla Martinez">
+      </div>
+      <div class="ex-info">
+        <span class="ex-year">Distinción</span>
+        <h2>Embajadora del Arte de América</h2>
+        <p>Título de nobleza otorgado a Karla como "Grande de las Artes" y Embajadora del Arte de América, por pintar el Bicentenario de América. Un reconocimiento a toda su trayectoria.</p>
+        <div class="ex-meta">
+          <span>Distinción — Grande de las Artes</span>
+          <span>Otorgado por — Galería Jaime Chávez</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- MOMENTS -->
+<section class="moments">
+  <div class="wrap">
+    <div class="section-label">Momentos en las salas y aperturas</div>
+    <div class="moments-grid">
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-01.jpg" alt="Obra de Karla Martinez expuesta en sala"><span>En la sala — obra de Karla</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-10.jpg" alt="Karla junto a otros artistas en una apertura"><span>Apertura con artistas invitados</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-03.jpg" alt="Vista de la sala de exposicion con obras colgadas"><span>Vista de la muestra colectiva</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-05.jpg" alt="Karla y colegas en la inauguracion de una exposicion"><span>Noche de inauguración</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-06.jpg" alt="Karla con otras artistas frente a las obras"><span>Con colegas artistas</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-04.jpg" alt="Escultura de hoja en cobre por Karla Martinez"><span>Escultura — hoja en cobre</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-07.jpg" alt="Grupo de asistentes en una apertura nocturna"><span>Apertura nocturna</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-08.jpg" alt="Celebracion en el taller de arte"><span>Celebración en el taller</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-09.jpg" alt="Karla con amigos y colegas del mundo del arte"><span>Entre amigos del arte</span></div>
+      <div class="moment clickable"><img src="images/exhibitions/exposicion-sala-02.jpg" alt="Karla con colegas en una galeria"><span>En la galería</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="ex-cta">
+  <a href="index.html#contact">Consultar sobre una obra →</a>
+</div>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© <span id="year"></span> Karla Martinez. Todas las obras son originales y firmadas a mano.</span>
+    <a href="index.html">Volver al inicio ↑</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" id="lightboxClose">Cerrar ✕</div>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.12});
+  reveals.forEach(el=>io.observe(el));
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('.clickable').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const img = el.querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  function closeLightbox(){lightbox.classList.remove('open');lightboxImg.src='';}
+  document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+  lightbox.addEventListener('click',(e)=>{if(e.target===lightbox)closeLightbox();});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeLightbox();});
+</script>
+
+<!-- Supabase dynamic content -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+(async function(){
+  if(typeof SUPABASE_URL==='undefined' || SUPABASE_URL.includes('YOUR-PROJECT')) return;
+  let sb;
+  try{ sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); }catch(e){ return; }
+  try{
+    const { data } = await sb.from('exhibitions').select('*').order('year',{ascending:true});
+    if(data && data.length){
+      const rows = document.querySelector('.exhibits .wrap');
+      const label = rows.querySelector('.section-label');
+      rows.innerHTML = '';
+      rows.appendChild(label);
+      data.forEach(x=>{
+        const art = document.createElement('article');
+        art.className='ex-row reveal in';
+        art.innerHTML = `
+          <div class="ex-figure clickable">
+            <img src="${x.image_url||''}" alt="${escapeAttr(x.title)}">
+          </div>
+          <div class="ex-info">
+            <span class="ex-year">${escapeHtml([x.month,x.year].filter(Boolean).join(' '))}</span>
+            <h2>${escapeHtml(x.title)}</h2>
+            ${x.description?`<p>${escapeHtml(x.description)}</p>`:''}
+            <div class="ex-meta">
+              ${x.venue?`<span>Lugar — ${escapeHtml(x.venue)}</span>`:''}
+              ${x.location?`<span>Ubicación — ${escapeHtml(x.location)}</span>`:''}
+            </div>
+          </div>`;
+        rows.appendChild(art);
+      });
+      // hide the static "moments" section since DB drives content now
+      const moments = document.querySelector('.moments');
+      if(moments) moments.style.display='none';
+      bindLightbox();
+    }
+  }catch(e){}
+
+  function bindLightbox(){
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.clickable').forEach(el=>{
+      el.addEventListener('click',()=>{
+        const img = el.querySelector('img');
+        lightboxImg.src = img.src; lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+  }
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function escapeAttr(s){ return (s||'').replace(/"/g,'&quot;'); }
+})();
+</script>

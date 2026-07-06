@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karla Martinez — Pinturas al Óleo desde Ecuador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --cream:#F4EBDC;
+    --paper:#FFFBF2;
+    --ink:#241A12;
+    --ink-soft:#473527;
+    --terracotta:#B8472B;
+    --terracotta-dim:#8f3a24;
+    --gold:#D9A23B;
+    --teal:#1C6B61;
+    --teal-deep:#103e38;
+    --line:rgba(36,26,18,0.14);
+    --max:1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--gold);color:var(--ink);}
+  :focus-visible{outline:2.5px solid var(--teal);outline-offset:3px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:'';width:18px;height:1px;background:var(--terracotta);display:inline-block;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.01em;}
+
+  /* NAV */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 36px;
+    mix-blend-mode:difference;
+    color:#fff;
+    font-family:'Space Mono',monospace;font-size:12px;
+    letter-spacing:0.12em;text-transform:uppercase;
+    pointer-events:none;
+  }
+  .nav a,.nav .nav-name{pointer-events:auto;}
+  .nav-name{font-weight:700;}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{opacity:0.85;transition:opacity .25s;}
+  .nav-links a:hover{opacity:1;}
+  @media(max-width:640px){
+    .nav{padding:18px 20px;}
+    .nav-links{gap:16px;font-size:10.5px;}
+  }
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:100vh;
+    display:flex;align-items:flex-end;
+    overflow:hidden;background:var(--ink);
+  }
+  .hero-img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 38%;
+    opacity:0.88;transform:scale(1.04);
+    animation:heroIn 1.6s ease-out forwards;
+  }
+  @keyframes heroIn{from{transform:scale(1.12);opacity:0;}to{transform:scale(1.04);opacity:0.88;}}
+  .hero::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(20,12,8,0.15) 0%,rgba(20,12,8,0.05) 35%,rgba(18,11,7,0.92) 92%);
+  }
+  .hero-content{
+    position:relative;z-index:2;width:100%;
+    padding:0 36px 64px;color:var(--paper);
+    opacity:0;animation:fadeUp 1.1s ease-out 0.5s forwards;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .hero-inner{max-width:var(--max);margin:0 auto;}
+  .hero-eyebrow{
+    font-family:'Space Mono',monospace;font-size:12px;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(48px,9vw,124px);line-height:0.94;font-weight:500;color:var(--paper);}
+  .hero h1 em{font-style:italic;font-weight:400;color:var(--gold);}
+  .hero-tagline{
+    margin-top:22px;max-width:520px;font-size:17px;
+    line-height:1.6;color:rgba(255,251,242,0.82);font-weight:300;
+  }
+  .scroll-cue{
+    margin-top:42px;display:flex;align-items:center;gap:12px;
+    font-family:'Space Mono',monospace;font-size:11px;
+    letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,251,242,0.6);
+  }
+  .scroll-cue .line{width:1px;height:34px;background:rgba(255,251,242,0.45);position:relative;overflow:hidden;}
+  .scroll-cue .line::after{
+    content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+    background:var(--gold);animation:drip 2.2s ease-in-out infinite;
+  }
+  @keyframes drip{0%{top:-100%;}60%{top:100%;}100%{top:100%;}}
+  @media(max-width:640px){.hero-content{padding:0 20px 48px;}}
+
+  /* SECTIONS */
+  section{position:relative;}
+  .section-pad{padding:120px 0;}
+  @media(max-width:780px){.section-pad{padding:80px 0;}}
+
+  .hang-line{width:100%;height:1px;background:var(--line);position:relative;margin-bottom:0;}
+  .hang-hook{position:absolute;top:-1px;width:9px;height:9px;border-radius:50%;background:var(--terracotta);box-shadow:0 0 0 3px var(--cream);}
+
+  /* ABOUT */
+  .about{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:72px;align-items:start;}
+  @media(max-width:880px){.about-grid{grid-template-columns:1fr;gap:36px;}}
+  .about-portrait{
+    position:relative;
+    width:100%;
+    max-width:360px;
+  }
+  .about-portrait img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:2px;
+  }
+  .about-name{
+    margin-top:16px;font-size:15px;
+    font-family:'Space Mono',monospace;letter-spacing:0.1em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  .about h2{font-size:clamp(30px,4vw,44px);margin-bottom:26px;color:var(--ink);}
+  .about p{font-size:17px;line-height:1.8;color:var(--ink-soft);margin-bottom:20px;max-width:560px;}
+  .about-stats{display:flex;gap:40px;margin-top:38px;flex-wrap:wrap;}
+  .about-stat .num{font-family:'Fraunces',serif;font-size:38px;color:var(--terracotta);line-height:1;}
+  .about-stat .lbl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px;}
+
+  /* GALLERY */
+  .gallery{background:var(--cream);}
+  .gallery-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;flex-wrap:wrap;gap:20px;}
+  .gallery-head h2{font-size:clamp(32px,4.4vw,52px);max-width:560px;}
+  .gallery-head p{max-width:320px;font-size:14.5px;line-height:1.65;color:var(--ink-soft);}
+
+  .gallery-filters{display:flex;gap:10px;margin-bottom:44px;flex-wrap:wrap;}
+  .gfilter{
+    font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;
+    padding:9px 18px;border:1px solid var(--line);background:transparent;color:var(--ink-soft);
+    cursor:pointer;border-radius:2px;transition:all .2s;
+  }
+  .gfilter:hover{border-color:var(--terracotta);color:var(--terracotta);}
+  .gfilter.active{background:var(--terracotta);border-color:var(--terracotta);color:#fff;}
+  .piece-list{display:flex;flex-direction:column;gap:0;}
+  .piece{padding-top:46px;position:relative;}
+  .piece + .piece{margin-top:90px;}
+  .piece .hang-line{margin-bottom:46px;}
+
+  .piece-grid{display:grid;grid-template-columns:1.3fr 0.7fr;gap:56px;align-items:center;}
+  .piece:nth-child(even) .piece-grid{grid-template-columns:0.7fr 1.3fr;}
+  .piece:nth-child(even) .piece-figure{order:2;}
+  .piece:nth-child(even) .piece-info{order:1;}
+  @media(max-width:860px){
+    .piece-grid,.piece:nth-child(even) .piece-grid{grid-template-columns:1fr;gap:26px;}
+    .piece:nth-child(even) .piece-figure,.piece:nth-child(even) .piece-info{order:initial;}
+  }
+
+  .piece-figure{
+    position:relative;background:var(--paper);padding:14px;
+    box-shadow:0 30px 60px -28px rgba(36,26,18,0.35);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);cursor:zoom-in;
+  }
+  .piece-figure img{width:100%;height:auto;display:block;}
+  .piece-figure:hover{transform:translateY(-6px);}
+
+  .piece-number{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--terracotta);margin-bottom:14px;display:block;}
+  .piece-info h3{font-size:clamp(24px,3vw,34px);color:var(--ink);margin-bottom:6px;}
+  .piece-info .es{font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:18px;display:block;}
+  .piece-meta{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--ink-soft);
+    display:flex;flex-direction:column;gap:4px;margin-bottom:20px;
+    border-left:2px solid var(--terracotta);padding-left:14px;
+  }
+  .piece-info p.desc{font-size:15.5px;line-height:1.75;color:var(--ink-soft);max-width:440px;}
+  .piece-cta{
+    margin-top:22px;display:inline-flex;align-items:center;gap:8px;
+    font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--teal-deep);border-bottom:1px solid var(--teal-deep);padding-bottom:4px;
+    transition:gap .25s,color .25s;
+  }
+  .piece-cta:hover{gap:14px;color:var(--terracotta);border-color:var(--terracotta);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* STRIP */
+  .strip{background:var(--ink);color:var(--paper);padding:90px 0;overflow:hidden;}
+  .strip-marquee{
+    display:flex;gap:64px;white-space:nowrap;
+    font-family:'Fraunces',serif;font-style:italic;
+    font-size:clamp(28px,5vw,56px);color:rgba(247,235,217,0.9);
+    animation:marquee 28s linear infinite;
+  }
+  .strip-marquee span{color:var(--gold);font-style:normal;font-family:'Space Mono',monospace;font-size:0.4em;align-self:center;letter-spacing:0.1em;}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media(prefers-reduced-motion:reduce){.strip-marquee{animation:none;}}
+
+  /* CONTACT */
+  .contact{background:linear-gradient(165deg,#1E0F08 0%,#3B1A0E 55%,#5C2D18 100%);color:var(--paper);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;}
+  @media(max-width:880px){.contact-grid{grid-template-columns:1fr;gap:40px;}}
+  .contact h2{font-size:clamp(32px,4.4vw,52px);color:var(--paper);margin-bottom:20px;}
+  .contact-eyebrow{color:var(--gold);}
+  .contact-eyebrow::before{background:var(--gold);}
+  .contact p.lead{font-size:16.5px;line-height:1.75;color:rgba(247,235,217,0.82);max-width:440px;margin-bottom:30px;}
+  .contact-detail{display:flex;gap:14px;margin-bottom:18px;font-size:14.5px;color:rgba(247,235,217,0.9);}
+  .contact-detail b{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);min-width:110px;display:inline-block;}
+
+  form.inquiry{background:rgba(255,251,242,0.06);border:1px solid rgba(255,251,242,0.18);border-radius:2px;padding:34px;}
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(247,235,217,0.7);margin-bottom:8px;}
+  .field input,.field textarea,.field select{
+    width:100%;background:rgba(255,251,242,0.08);border:1px solid rgba(255,251,242,0.25);
+    border-radius:1px;padding:12px 14px;color:var(--paper);
+    font-family:'Work Sans',sans-serif;font-size:14.5px;
+    transition:border-color .2s,background .2s;
+  }
+  .field input::placeholder,.field textarea::placeholder{color:rgba(247,235,217,0.4);}
+  .field input:focus,.field textarea:focus,.field select:focus{background:rgba(255,251,242,0.13);border-color:var(--gold);outline:none;}
+  .field textarea{resize:vertical;min-height:96px;}
+  .field select option{color:#111;}
+  button.submit{
+    width:100%;background:var(--gold);color:var(--ink);border:none;padding:15px 20px;
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+    cursor:pointer;transition:background .2s,transform .15s;
+  }
+  button.submit:hover{background:#e8b65a;}
+  button.submit:active{transform:scale(0.98);}
+  .form-note{margin-top:14px;font-size:12.5px;color:rgba(247,235,217,0.55);line-height:1.5;}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(247,235,217,0.6);padding:36px 0;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.05em;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .footer-row a{border-bottom:1px solid rgba(247,235,217,0.3);}
+
+  /* LIGHTBOX */
+  .lightbox{
+    position:fixed;inset:0;background:rgba(18,11,7,0.94);
+    display:flex;align-items:center;justify-content:center;
+    z-index:100;opacity:0;pointer-events:none;transition:opacity .3s;padding:40px;
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+  .lightbox img{max-width:90vw;max-height:85vh;box-shadow:0 40px 80px rgba(0,0,0,0.5);}
+  .lightbox-close{
+    position:absolute;top:28px;right:36px;color:#fff;
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+    cursor:pointer;display:flex;align-items:center;gap:8px;
+  }
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-name">Karla Martinez</span>
+  <div class="nav-links">
+    <a href="#about">Sobre mí</a>
+    <a href="#gallery">Galería</a>
+    <a href="exposiciones.html">Exposiciones</a>
+    <a href="#contact">Contacto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-img" src="images/tree_sunset_triptych.jpg" alt="Oil painting triptych of a tree silhouetted against a setting sun by Karla Martinez">
+  <div class="hero-content">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Óleo sobre lienzo · Quito, Ecuador</div>
+      <h1>Karla<br><em>Martinez</em></h1>
+      <p class="hero-tagline">Tres décadas de pintura al óleo inspirada en la luz, la tierra y el color de Sudamérica. Obras originales enviadas a coleccionistas de todo el mundo.</p>
+      <div class="scroll-cue"><div class="line"></div>Ver la galería</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about section-pad" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="about-portrait">
+        <img src="images/karla_portrait.jpg" alt="Retrato de la artista Karla Martinez">
+      </div>
+      <div class="about-name">— Karla Martinez</div>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">Sobre la artista</div>
+      <h2 style="margin-top:18px;">Pintando el corazón de Sudamérica durante más de treinta años.</h2>
+      <p>Con más de tres décadas dedicadas al arte de la pintura al óleo, mi camino ha sido de exploración continua y expresión apasionada. Desde Ecuador, mi obra se nutre del rico patrimonio cultural y los paisajes impresionantes de Sudamérica.</p>
+      <p>Mis pinturas han sido expuestas en numerosas muestras de prestigio por toda Sudamérica, obteniendo reconocimiento por su vibrante uso del color, técnica magistral y profundidad emocional. Cada obra es un trabajo de amor, elaborado con esmero para capturar momentos de belleza y despertar emociones profundas.</p>
+      <p>Es un honor compartir mi obra con coleccionistas y amantes del arte en todo el mundo. Ya sea que busques una pieza central para tu hogar o desees ampliar tu colección, ofrezco envíos internacionales para llevar estas creaciones originales hasta donde estés.</p>
+      <div class="about-stats">
+        <div class="about-stat"><div class="num">30+</div><div class="lbl">Años pintando</div></div>
+        <div class="about-stat"><div class="num">SA</div><div class="lbl">Expuesta en<br>Sudamérica</div></div>
+        <div class="about-stat"><div class="num">∞</div><div class="lbl">Envíos a<br>todo el mundo</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery section-pad" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head reveal">
+      <h2>Obras seleccionadas, tal como están — directamente desde el estudio.</h2>
+      <p>Cada obra es original y firmada. Haz clic en cualquier pieza para verla en detalle, o contáctame para consultar disponibilidad, tamaños y envíos.</p>
+    </div>
+
+    <div class="gallery-filters reveal" id="galleryFilters" style="display:none;">
+      <button class="gfilter active" data-filter="todas">Todas</button>
+      <button class="gfilter" data-filter="pintura">Pinturas</button>
+      <button class="gfilter" data-filter="ceramica">Cerámica</button>
+      <button class="gfilter" data-filter="varios">Varios</button>
+    </div>
+
+    <div class="piece-list">
+
+      <article class="piece reveal">
+        <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+        <div class="piece-grid">
+          <div class="piece-figure">
+            <img src="images/iglesia_del_lago.jpg" alt="Pintura al óleo de una iglesia junto a un lago, rodeada de árboles, por Karla Martinez">
+          </div>
+          <div class="piece-info">
+            <span class="piece-number">2003 · Exhibida en 2019</span>
+            <h3>Iglesia del lago</h3>
+            <span class="es">Church by the Lake</span>
+            <div class="piece-meta">
+              <span>Técnica — Óleo sobre lienzo</span>
+              <span>Firmado — Karla, 2003</span>
+              <span>Exhibida — Cumbre Mundial de las Artes, 2019</span>
+            </div>
+            <p class="desc">Una iglesia de piedra se asoma entre el follaje bajo un cielo luminoso — una de las obras más queridas de Karla, presentada en la Cumbre Mundial de las Artes por la Paz y la Vida.</p>
+            <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece reveal">
+        <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+        <div class="piece-grid">
+          <div class="piece-figure">
+            <img src="images/tree_sunset_triptych.jpg" alt="Triptych oil painting of a windswept tree against a glowing sunset">
+          </div>
+          <div class="piece-info">
+            <span class="piece-number">Tríptico · 3 paneles</span>
+            <h3>Atardecer en el Pacífico</h3>
+            <span class="es">Pacific Sunset</span>
+            <div class="piece-meta">
+              <span>Técnica — Óleo sobre lienzo, espátula</span>
+              <span>Formato — Tríptico de tres paneles</span>
+            </div>
+            <p class="desc">Un árbol curtido se inclina hacia un cielo en llamas, pintado con trazos gruesos y texturizados que atrapan la luz. Diseñado para colgar como conjunto sobre una repisa o pared larga.</p>
+            <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece reveal">
+        <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+        <div class="piece-grid">
+          <div class="piece-figure">
+            <img src="images/butterflies_pond.jpg" alt="Oil painting of butterflies above a quiet forest pond">
+          </div>
+          <div class="piece-info">
+            <span class="piece-number">2008</span>
+            <h3>Mariposas del Estero</h3>
+            <span class="es">Butterflies of the Wetland</span>
+            <div class="piece-meta">
+              <span>Técnica — Óleo sobre lienzo</span>
+              <span>Firmado — Kay, 2008</span>
+            </div>
+            <p class="desc">Un estanque verde y tranquilo cobra vida con mariposas en vuelo — una faceta más serena y pastoral dentro del repertorio de la artista.</p>
+            <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece reveal">
+        <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+        <div class="piece-grid">
+          <div class="piece-figure">
+            <img src="images/forest_blue_orange.jpg" alt="Abstract oil painting of a forest split between blue shadow and orange light">
+          </div>
+          <div class="piece-info">
+            <span class="piece-number">Estudio de taller</span>
+            <h3>Bosque en Dos Luces</h3>
+            <span class="es">Forest in Two Lights</span>
+            <div class="piece-meta">
+              <span>Medium — Acrylic on canvas</span>
+              <span>Disponible — Sí</span>
+            </div>
+            <p class="desc">Sombra índigo y luz ámbar dividen un grupo de árboles en dos — un estudio expresivo y de pequeño formato sobre el contraste y la textura de espátula.</p>
+            <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece reveal">
+        <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+        <div class="piece-grid">
+          <div class="piece-figure">
+            <img src="images/teal_tree.jpg" alt="Oil painting of a tree rendered entirely in teal and turquoise tones">
+          </div>
+          <div class="piece-info">
+            <span class="piece-number">2016 · Exposición colectiva</span>
+            <h3>Desde la Mirada</h3>
+            <span class="es">From the Gaze</span>
+            <div class="piece-meta">
+              <span>Medium — Mixed media on canvas</span>
+              <span>Expuesta — "Colectivo," 2016</span>
+            </div>
+            <p class="desc">Pintada íntegramente en turquesa, esta obra fue presentada en una exposición colectiva en 2016 — una apuesta atrevida hacia una paleta única y saturada.</p>
+            <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece reveal">
+        <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+        <div class="piece-grid">
+          <div class="piece-figure">
+            <img src="images/orange_leaf_tree.jpg" alt="Textured oil painting of a tree made of overlapping orange leaf shapes on a red background">
+          </div>
+          <div class="piece-info">
+            <span class="piece-number">Relieve escultórico</span>
+            <h3>Árbol de Otoño</h3>
+            <span class="es">Autumn Tree</span>
+            <div class="piece-meta">
+              <span>Técnica — Acrílico con relieve sobre lienzo</span>
+              <span>Firmado — Kay</span>
+            </div>
+            <p class="desc">Decenas de hojas construidas individualmente se elevan del lienzo en relieve, resplandeciendo sobre un fondo rojo intenso. Una obra de gran presencia escultórica.</p>
+            <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece reveal">
+        <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+        <div class="piece-grid">
+          <div class="piece-figure">
+            <img src="images/yellow_beetle.jpg" alt="Oil painting of a vintage yellow Volkswagen Beetle parked by a wooden fence">
+          </div>
+          <div class="piece-info">
+            <span class="piece-number">Naturaleza muerta</span>
+            <h3>Escarabajo Amarillo</h3>
+            <span class="es">Yellow Beetle</span>
+            <div class="piece-meta">
+              <span>Técnica — Óleo sobre lienzo</span>
+              <span>Firmado — Kay</span>
+            </div>
+            <p class="desc">Un Volkswagen Beetle desgastado capta la luz junto a una cerca de campo — prueba de que el ojo de la artista se mueve con soltura del paisaje a la nostalgia cotidiana.</p>
+            <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="piece reveal">
+        <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+        <div class="piece-grid">
+          <div class="piece-figure">
+            <img src="images/countryside_landscape.jpg" alt="Classical oil painting of a countryside road, shepherd, and grazing sheep beneath a stormy sky">
+          </div>
+          <div class="piece-info">
+            <span class="piece-number">2003</span>
+            <h3>Camino al Río</h3>
+            <span class="es">Road to the River</span>
+            <div class="piece-meta">
+              <span>Técnica — Óleo sobre lienzo</span>
+              <span>Firmado y fechado — Karla Martinez, Nov. 2003</span>
+            </div>
+            <p class="desc">Una tormenta se cierne sobre un camino rural mientras un pastor lleva su rebaño al agua — un estudio de paisaje clásico, enmarcado y firmado en los inicios de la carrera de la artista.</p>
+            <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-marquee">
+    <span>Óleo</span>Obras&nbsp;originales <span>·</span>Firmadas&nbsp;a&nbsp;mano <span>·</span>Envíos&nbsp;internacionales <span>·</span>Hecho&nbsp;en&nbsp;Ecuador <span>·</span>Obras&nbsp;originales <span>·</span>Firmadas&nbsp;a&nbsp;mano <span>·</span>Envíos&nbsp;internacionales <span>·</span>Hecho&nbsp;en&nbsp;Ecuador <span>·</span>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact section-pad" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="eyebrow contact-eyebrow">Contacto</div>
+      <h2 style="margin-top:18px;">Lleva una de estas obras a tu hogar.</h2>
+      <p class="lead">Cuéntame qué obra te llamó la atención, dónde viviría y cualquier pregunta sobre tamaño o enmarcado. Respondo personalmente a cada mensaje — generalmente en uno o dos días.</p>
+      <div class="contact-detail"><b>Ubicación</b><span>Ecuador, Sudamérica</span></div>
+      <div class="contact-detail"><b>Envíos</b><span>Internacionales, empacados con cuidado</span></div>
+      <div class="contact-detail"><b>Email</b><span><a href="mailto:karla@kaystyle.com" style="color:var(--gold);border-bottom:1px solid var(--gold);">karla@kaystyle.com</a></span></div>
+    </div>
+    <form class="inquiry" id="inquiryForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="a56fed0e-328a-4874-b22d-d20f0b4c6a4d">
+      <input type="hidden" name="subject" value="Nueva consulta desde kaystyle.com">
+      <input type="hidden" name="redirect" value="false">
+      <div class="field">
+        <label for="name">Tu nombre</label>
+        <input id="name" name="name" type="text" placeholder="Ana Coleccionista" required>
+      </div>
+      <div class="field">
+        <label for="email">Tu correo</label>
+        <input id="email" name="email" type="email" placeholder="jane@email.com" required>
+      </div>
+      <div class="field">
+        <label for="piece">¿Qué obra te interesa?</label>
+        <select id="piece" name="obra">
+          <option>Atardecer en el Pacífico (Tríptico)</option>
+          <option>Mariposas del Estero</option>
+          <option>Bosque en Dos Luces</option>
+          <option>Desde la Mirada</option>
+          <option>Árbol de Otoño</option>
+          <option>Escarabajo Amarillo</option>
+          <option>Camino al Río</option>
+          <option>Obra personalizada / encargo</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" placeholder="Me gustaría saber más sobre el tamaño, enmarcado y envío a..."></textarea>
+      </div>
+      <button class="submit" type="submit">Enviar consulta</button>
+      <p id="form-status" class="form-note"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© <span id="year"></span> Karla Martinez. Todas las obras son originales y firmadas a mano.</span>
+    <a href="#about">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" id="lightboxClose">Close ✕</div>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.12});
+  reveals.forEach(el=>io.observe(el));
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('.piece-figure').forEach(fig=>{
+    fig.addEventListener('click',()=>{
+      const img = fig.querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  function closeLightbox(){lightbox.classList.remove('open');lightboxImg.src='';}
+  document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+  lightbox.addEventListener('click',(e)=>{if(e.target===lightbox)closeLightbox();});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeLightbox();});
+
+
+  const form = document.getElementById('inquiryForm');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const status = document.getElementById('form-status');
+    const btn = form.querySelector('button.submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+    const data = new FormData(form);
+    const res = await fetch('https://api.web3forms.com/submit', {method:'POST', body: data});
+    const json = await res.json();
+    if (json.success) {
+      status.style.color = 'var(--gold)';
+      status.textContent = '¡Mensaje enviado! Karla te responderá pronto.';
+      form.reset();
+    } else {
+      status.style.color = '#ff8a80';
+      status.textContent = 'Hubo un error. Por favor escríbenos a karla@kaystyle.com';
+    }
+    btn.textContent = 'Enviar consulta';
+    btn.disabled = false;
+  });
+</script>
+
+<!-- Supabase dynamic content (progressive enhancement) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+(async function(){
+  if(typeof SUPABASE_URL==='undefined' || SUPABASE_URL.includes('YOUR-PROJECT')) return; // not configured yet
+  let sb;
+  try{ sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); }catch(e){ return; }
+
+  // ---- PAINTINGS / WORKS ----
+  try{
+    const { data: paintings } = await sb.from('paintings').select('*').order('year',{ascending:false});
+    if(paintings && paintings.length){
+      const list = document.querySelector('.piece-list');
+      list.innerHTML = paintings.map(p=>`
+        <article class="piece reveal in" data-type="${escapeAttr(p.type||'pintura')}">
+          <div class="hang-line"><div class="hang-hook" style="left:50%;"></div></div>
+          <div class="piece-grid">
+            <div class="piece-figure">
+              <img src="${p.image_url}" alt="${escapeAttr(p.title)}">
+            </div>
+            <div class="piece-info">
+              <span class="piece-number">${escapeHtml([p.month,p.year].filter(Boolean).join(' '))}</span>
+              <h3>${escapeHtml(p.title)}</h3>
+              ${p.size?`<span class="es">${escapeHtml(p.size)}</span>`:''}
+              <p class="desc">${escapeHtml(p.description)}</p>
+              <a class="piece-cta" href="#contact">Consultar sobre esta obra →</a>
+            </div>
+          </div>
+        </article>`).join('');
+      bindLightbox();
+
+      // show filter tabs only if there's more than one type present
+      const types = new Set(paintings.map(p=>p.type||'pintura'));
+      if(types.size > 1){
+        const filters = document.getElementById('galleryFilters');
+        filters.style.display = 'flex';
+        filters.querySelectorAll('.gfilter').forEach(btn=>{
+          // hide tabs for categories with no pieces
+          const f = btn.dataset.filter;
+          if(f!=='todas' && !types.has(f)) btn.style.display='none';
+          btn.addEventListener('click', ()=>{
+            filters.querySelectorAll('.gfilter').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.piece-list .piece').forEach(piece=>{
+              piece.style.display = (f==='todas' || piece.dataset.type===f) ? '' : 'none';
+            });
+          });
+        });
+      }
+    }
+  }catch(e){ /* keep static fallback */ }
+
+  // ---- SITE CONTENT (bio, portrait, contact) ----
+  try{
+    const { data: content } = await sb.from('site_content').select('*');
+    if(content && content.length){
+      const map={}; content.forEach(r=>map[r.key]=r.value);
+      const bios = document.querySelectorAll('.about p');
+      if(map.bio_1 && bios[0]) bios[0].textContent = map.bio_1;
+      if(map.bio_2 && bios[1]) bios[1].textContent = map.bio_2;
+      if(map.bio_3 && bios[2]) bios[2].textContent = map.bio_3;
+      const portrait = document.querySelector('.about-portrait img');
+      if(map.portrait_url && portrait) portrait.src = map.portrait_url;
+      // contact details
+      const details = document.querySelectorAll('.contact-detail span');
+      if(map.contact_location && details[0]) details[0].textContent = map.contact_location;
+      if(map.contact_shipping && details[1]) details[1].textContent = map.contact_shipping;
+      if(map.contact_email){
+        const emailLink = document.querySelector('.contact-detail a[href^="mailto:"]');
+        if(emailLink){ emailLink.href='mailto:'+map.contact_email; emailLink.textContent=map.contact_email; }
+      }
+    }
+  }catch(e){}
+
+  function bindLightbox(){
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.piece-figure').forEach(fig=>{
+      fig.addEventListener('click',()=>{
+        const img = fig.querySelector('img');
+        lightboxImg.src = img.src; lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+  }
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function escapeAttr(s){ return (s||'').replace(/"/g,'&quot;'); }
+})();
+</script>
